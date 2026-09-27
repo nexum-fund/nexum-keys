@@ -1,15 +1,8 @@
-# The Nexum key log
+# The Nexum key log — STAGING
 
-This repository is the public mirror of the keys Nexum uses to sign an
-examination. It is written by the house automatically whenever a key is issued
-or revoked; nothing here is edited by hand.
+**These are not the house's keys.** This branch is written by the staging
+environment and carries purpose-made fixture keys that have never signed a
+delivered examination. It exists so the publishing path can be proved end to
+end before production uses it.
 
-**A signature made before a key's revocation date remains valid.** Revoking a
-key ends its use from that moment on and does not invalidate anything it
-signed before.
-
-No key has been issued yet. When the first one is, this file is replaced with
-the log and the commands for verifying a signature yourself, and `keys.json`
-appears beside it.
-
-Canonical copy: <https://nexum.fund/keys>
+The real key log is on `main`, and at <https://nexum.fund/keys>.
