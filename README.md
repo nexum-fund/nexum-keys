@@ -6,7 +6,7 @@ without asking Nexum for anything. **A signature made before a key's
 revocation date remains valid: revoking a key ends its use from that moment
 on, and does not invalidate anything it signed before.**
 
-3 keys issued, 2 live.
+4 keys issued, 3 live.
 Canonical copy: <https://nexum.fund/keys>. Format `nexum-key-log/1.0`.
 
 Each entry carries the key's identifier, its role (the house, or an
