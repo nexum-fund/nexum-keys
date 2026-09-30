@@ -64,7 +64,7 @@ for SLOT in analyst reviewer house; do
   if [ "$K" = "$(jq -r ".identity.people.${SLOT}KeyId" "$REF.v$V.canonical.json")" ]; then echo "ok      $SLOT signs with $K, the key the record names"; else echo "FAILED  $SLOT: the record names another key"; fi
   jq -r --arg k "$K" '.keys[] | select(.keyId == $k) | .publicKeyPem' "$KEYS" > "$SLOT.pem"
   jq -r ".$SLOT.signature" "$REF.v$V.signatures.json" | base64 -d > "$SLOT.sig"
-  if openssl pkeyutl -verify -pubin -inkey "$SLOT.pem" -rawin -in digest.bin -sigfile "$SLOT.sig" >/dev/null; then echo "ok      $SLOT signature verifies"; else echo "FAILED  $SLOT signature"; fi
+  if openssl pkeyutl -verify -pubin -inkey "$SLOT.pem" -rawin -in digest.bin -sigfile "$SLOT.sig" >/dev/null 2>&1; then echo "ok      $SLOT signature verifies"; else echo "FAILED  $SLOT signature"; fi
   jq -r --arg k "$K" --arg t "$T" '.keys[] | select(.keyId == $k) | if .issuedAt < $t and (.revokedAt == null or .revokedAt > $t) then "ok      \(.keyId) was live when it signed" else "FAILED  \(.keyId) was not live at \($t)" end' "$KEYS"
 done
 if [ "$(jq -r .analyst.keyId "$REF.v$V.signatures.json")" != "$(jq -r .reviewer.keyId "$REF.v$V.signatures.json")" ]; then echo "ok      analyst and reviewer keys differ"; else echo "FAILED  one key in both capacities"; fi
@@ -75,7 +75,7 @@ if [ "$(jq -r .analyst.keyId "$REF.v$V.signatures.json")" != "$(jq -r .reviewer.
 The RFC 3161 token proves the digest existed at a time, which is what makes the revocation dates above meaningful. The roots are the authorities' own, fetched from them and not from Nexum: DigiCert's, and FreeTSA's, which is the fallback; the token names which one signed.
 
 ```sh
-openssl ts -reply -in "$REF.v$V.tsr" -text | grep -E "Time stamp:"
+openssl ts -reply -in "$REF.v$V.tsr" -text 2>/dev/null | grep -E "Time stamp:"
 curl -s https://cacerts.digicert.com/DigiCertTrustedRootG4.crt.pem >  tsa-roots.pem
 curl -s https://freetsa.org/files/cacert.pem                      >> tsa-roots.pem
 if openssl ts -verify -digest "$D" -in "$REF.v$V.tsr" -CAfile tsa-roots.pem >/dev/null 2>&1; then echo "ok      timestamp verifies against the authority's chain"; else echo "FAILED  timestamp"; fi
