@@ -6,13 +6,16 @@ without asking Nexum for anything. **A signature made before a key's
 revocation date remains valid: revoking a key ends its use from that moment
 on, and does not invalidate anything it signed before.**
 
-2 keys issued, 1 live.
+3 keys issued, 2 live.
 Canonical copy: <https://nexum.fund/keys>. Format `nexum-key-log/1.0`.
 
-Each entry carries the key's identifier, the role it signs in (house, analyst
-or reviewer), the public key in raw and PEM form, and the dates it was issued
-and revoked. It does not carry who holds a key — publishing that would publish
-who examined whom — nor why any key was revoked.
+Each entry carries the key's identifier, its role (the house, or an
+examiner), the public key in raw and PEM form, and the dates it was issued and
+revoked. An examiner signs as analyst on the examinations they produce and as
+second reviewer on those they review, with the same key; which capacity a
+signature was made in is stated by the examination itself, not by the key. The
+log does not carry who holds a key — publishing that would publish who
+examined whom — nor why any key was revoked.
 
 ## Verifying an examination
 
@@ -38,6 +41,12 @@ Signatures are Ed25519 **over the 32 raw bytes the digest decodes to**, not
 over its hex text. Take the signer's `publicKeyPem` from `keys.json` by its
 `keyId`, and check that `issuedAt` is before the signature's `signedAt`
 and that `revokedAt` is either absent or after it.
+
+Check the slot as well as the signature. The canonical JSON names, under
+`identity.people`, the key each capacity signs with — `analystKeyId`,
+`reviewerKeyId` and `houseKeyId` — and those names are inside the digest.
+Each signature's `keyId` must equal the one the record names for its slot,
+and the analyst's and the reviewer's must differ.
 
 ```sh
 printf '%s' '<digest hex>'   | xxd -r -p    > digest.bin
