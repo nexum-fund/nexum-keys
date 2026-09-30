@@ -6,6 +6,9 @@ without asking Nexum for anything. **A signature made before a key's
 revocation date remains valid: revoking a key ends its use from that moment
 on, and does not invalidate anything it signed before.**
 
+The `main` branch is the house's key log; the `staging` branch holds test
+keys only.
+
 4 keys issued, 2 live.
 Canonical copy: <https://nexum.fund/keys>. Format `nexum-key-log/1.0`.
 
