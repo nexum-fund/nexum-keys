@@ -2,7 +2,7 @@
   "format": "nexum-key-log/1.0",
   "house": "NEXUM ANALYTICS LTD",
   "verify": "https://nexum.fund/verify",
-  "fingerprint": "fe0bdb17a609a988424b04ff08372ef077a3ecd3ee280ad667fe5a55444c6186",
+  "fingerprint": "d9866af41ed53a66c90ee083a5129dab31477a256b103eceba3f3284dbf9e5b7",
   "keys": [
     {
       "keyId": "nx-key-2026-1775c945",
@@ -18,7 +18,7 @@
       "publicKey": "8vCk7wqvzwZL0DaE3FIpD5FqKxF36VrFVHKL68zpWRM=",
       "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA8vCk7wqvzwZL0DaE3FIpD5FqKxF36VrFVHKL68zpWRM=\n-----END PUBLIC KEY-----\n",
       "issuedAt": "2026-09-27T01:24:40.530Z",
-      "revokedAt": null
+      "revokedAt": "2026-09-30T01:45:32.233Z"
     }
   ]
 }
