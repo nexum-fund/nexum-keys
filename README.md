@@ -9,7 +9,7 @@ on, and does not invalidate anything it signed before.**
 The `main` branch is the house's key log; the `staging` branch holds test
 keys only.
 
-1 key issued, 1 live.
+2 keys issued, 2 live.
 Canonical copy: <https://nexum.fund/keys>. Format `nexum-key-log/1.0`.
 
 Each entry carries the key's identifier, its role (the house, or an
